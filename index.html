@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>雪落时分的残响 — Echoes Before the Snowfall</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="stage-frame">
+      <!-- Background & CG Layers -->
+      <div id="bg-layer-back" class="bg-layer"></div>
+      <div id="bg-layer-front" class="bg-layer"></div>
+      <div id="cg-layer" class="cg-layer hidden"></div>
+
+      <!-- Character Sprite Stage -->
+      <div id="sprite-stage">
+        <div id="sprite-left" class="sprite-slot pos-left"></div>
+        <div id="sprite-center" class="sprite-slot pos-center"></div>
+        <div id="sprite-right" class="sprite-slot pos-right"></div>
+      </div>
+
+      <!-- Ambient Particle Layer (Leaves / Snow) -->
+      <canvas id="particle-canvas"></canvas>
+
+      <!-- Screen Transition / Flash Overlay -->
+      <div id="fx-overlay"></div>
+
+      <!-- HUD: Date & Location -->
+      <div id="hud-top" class="hidden">
+        <div class="hud-pill">
+          <span id="hud-date">11月24日 · 周五</span>
+          <span class="hud-sep">|</span>
+          <span id="hud-location">广播与文艺同好会室</span>
+        </div>
+        <div id="hud-status-tags">
+          <span id="tag-auto" class="status-badge hidden">自动播放</span>
+          <span id="tag-skip" class="status-badge hidden">快进中</span>
+        </div>
+      </div>
+
+      <!-- Choice Menu Overlay -->
+      <div id="choice-overlay" class="hidden">
+        <div id="choice-list"></div>
+      </div>
+
+      <!-- Dialogue Box -->
+      <div id="dialogue-container" class="hidden">
+        <div id="dialogue-box">
+          <div id="name-plate" class="hidden">
+            <span id="speaker-name"></span>
+          </div>
+          <div id="dialogue-text"></div>
+          <div id="next-indicator" class="hidden">▼</div>
+
+          <div id="quick-bar">
+            <button class="qbtn" data-action="qsave" title="快速存档 (F5)">快存</button>
+            <button class="qbtn" data-action="qload" title="快速读取 (F9)">快读</button>
+            <button class="qbtn" data-action="save" title="存档">存档</button>
+            <button class="qbtn" data-action="load" title="读档">读档</button>
+            <button class="qbtn" data-action="log" title="对话记录 (L / 滚轮上)">记录</button>
+            <button class="qbtn" id="btn-auto" data-action="auto" title="自动阅读 (A)">自动</button>
+            <button class="qbtn" id="btn-skip" data-action="skip" title="快进 (Ctrl / S)">快进</button>
+            <button class="qbtn" data-action="hide" title="隐藏对话框 (H / 右键)">隐藏</button>
+            <button class="qbtn" data-action="config" title="系统设置">设置</button>
+            <button class="qbtn" data-action="title" title="返回标题">标题</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== TITLE SCREEN ==================== -->
+      <div id="title-screen">
+        <div class="title-bg" style="background-image: url('assets/images/bg/bg_title.jpg');"></div>
+        <div class="title-vignette"></div>
+        <canvas id="title-snow-canvas"></canvas>
+
+        <div class="title-content">
+          <div class="title-header">
+            <div class="title-subtitle-en">ECHOES BEFORE THE SNOWFALL</div>
+            <h1 class="title-main">雪落时分的残响</h1>
+            <p class="title-tagline">—— 那年冬天未能寄出的回响，在初雪落下之前悄然重叠。</p>
+          </div>
+
+          <nav class="title-menu">
+            <button id="btn-new-game" class="menu-btn primary">从头开始 <span>NEW GAME</span></button>
+            <button id="btn-continue" class="menu-btn">继续游戏 <span>CONTINUE</span></button>
+            <button id="btn-title-load" class="menu-btn">读取进度 <span>LOAD GAME</span></button>
+            <button id="btn-gallery" class="menu-btn">回忆画廊 <span>CG GALLERY</span></button>
+            <button id="btn-music" class="menu-btn">音乐鉴赏 <span>MUSIC ROOM</span></button>
+            <button id="btn-title-config" class="menu-btn">系统设置 <span>CONFIG</span></button>
+          </nav>
+
+          <div class="title-footer">
+            <span>樱见丘学园 · 冬季特别篇 ｜ 部分背景素材：みんちりえ</span>
+            <span id="title-progress-hint"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== ENDING / CHAPTER CARD ==================== -->
+      <div id="ending-screen" class="hidden">
+        <div class="ending-inner">
+          <div id="ending-badge" class="ending-badge">TRUE END</div>
+          <h2 id="ending-title"></h2>
+          <p id="ending-desc"></p>
+          <div class="ending-stats" id="ending-stats"></div>
+          <button id="btn-ending-return" class="menu-btn primary">返回标题画面</button>
+        </div>
+      </div>
+
+      <!-- ==================== MODALS ==================== -->
+      <!-- Save / Load Modal -->
+      <div id="modal-saveload" class="modal-backdrop hidden">
+        <div class="modal-panel large">
+          <div class="modal-header">
+            <h3 id="saveload-title">保存进度</h3>
+            <button class="modal-close" data-close="modal-saveload">✕</button>
+          </div>
+          <div id="save-slots-grid" class="slots-grid"></div>
+        </div>
+      </div>
+
+      <!-- Backlog Modal -->
+      <div id="modal-backlog" class="modal-backdrop hidden">
+        <div class="modal-panel large">
+          <div class="modal-header">
+            <h3>对话记录 · BACKLOG</h3>
+            <button class="modal-close" data-close="modal-backlog">✕</button>
+          </div>
+          <div id="backlog-list" class="backlog-list"></div>
+        </div>
+      </div>
+
+      <!-- Config Modal -->
+      <div id="modal-config" class="modal-backdrop hidden">
+        <div class="modal-panel medium">
+          <div class="modal-header">
+            <h3>系统设置 · CONFIG</h3>
+            <button class="modal-close" data-close="modal-config">✕</button>
+          </div>
+          <div class="config-body">
+            <div class="config-row">
+              <label>文字显示速度</label>
+              <input type="range" id="cfg-text-speed" min="1" max="100" value="72" />
+              <span id="val-text-speed">72</span>
+            </div>
+            <div class="config-row">
+              <label>自动阅读速度</label>
+              <input type="range" id="cfg-auto-speed" min="1" max="100" value="55" />
+              <span id="val-auto-speed">55</span>
+            </div>
+            <div class="config-row">
+              <label>背景音乐音量 (BGM)</label>
+              <input type="range" id="cfg-bgm-vol" min="0" max="100" value="65" />
+              <span id="val-bgm-vol">65%</span>
+            </div>
+            <div class="config-row">
+              <label>界面与环境音效 (SFX)</label>
+              <input type="range" id="cfg-sfx-vol" min="0" max="100" value="75" />
+              <span id="val-sfx-vol">75%</span>
+            </div>
+            <div class="config-row toggle-row">
+              <label>快进模式</label>
+              <div class="radio-group">
+                <label><input type="radio" name="skip-mode" value="read" checked /> 仅已读文本</label>
+                <label><input type="radio" name="skip-mode" value="all" /> 全部文本</label>
+              </div>
+            </div>
+            <div class="config-row toggle-row">
+              <label>粒子氛围特效 (飘雪/落叶)</label>
+              <label class="switch">
+                <input type="checkbox" id="cfg-particles" checked />
+                <span>开启</span>
+              </label>
+            </div>
+          </div>
+          <div class="config-footer">
+            <button id="btn-cfg-reset" class="sub-btn">恢复默认</button>
+            <button class="sub-btn primary" data-close="modal-config">确定</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CG Gallery Modal -->
+      <div id="modal-gallery" class="modal-backdrop hidden">
+        <div class="modal-panel large">
+          <div class="modal-header">
+            <h3>回忆画廊 · CG GALLERY</h3>
+            <button class="modal-close" data-close="modal-gallery">✕</button>
+          </div>
+          <div id="gallery-grid" class="gallery-grid"></div>
+        </div>
+      </div>
+
+      <!-- CG Fullscreen Lightbox -->
+      <div id="cg-lightbox" class="modal-backdrop hidden">
+        <img id="cg-lightbox-img" src="" alt="Event CG" />
+        <div id="cg-lightbox-caption"></div>
+      </div>
+
+      <!-- Music Room Modal -->
+      <div id="modal-music" class="modal-backdrop hidden">
+        <div class="modal-panel medium">
+          <div class="modal-header">
+            <h3>音乐鉴赏 · MUSIC ROOM</h3>
+            <button class="modal-close" data-close="modal-music">✕</button>
+          </div>
+          <div id="music-list" class="music-list"></div>
+        </div>
+      </div>
+
+      <!-- Toast Notification -->
+      <div id="toast" class="hidden"></div>
+    </div>
+  </div>
+
+  <script src="js/audio.js"></script>
+  <script src="js/story_common.js"></script>
+  <script src="js/story_routes.js"></script>
+  <script src="js/engine.js"></script>
+</body>
+</html>
