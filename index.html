@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="雪落时分的残响" />
   <meta name="mobile-web-app-capable" content="yes" />
   <title>雪落时分的残响 — Echoes Before the Snowfall</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❄️</text></svg>" />
@@ -97,6 +99,7 @@
 
           <div class="title-footer">
             <span>樱见丘学园 · 冬季特别篇 ｜ 部分背景素材：みんちりえ</span>
+            <button id="btn-title-guide" class="footer-link-btn" type="button">主屏幕安装与加速指引</button>
             <span id="title-progress-hint"></span>
           </div>
         </div>
@@ -218,6 +221,42 @@
             <button class="modal-close" data-close="modal-music">✕</button>
           </div>
           <div id="music-list" class="music-list"></div>
+        </div>
+      </div>
+
+      <!-- Mobile Install & CDN Guide Modal -->
+      <div id="modal-mobile-guide" class="modal-backdrop hidden">
+        <div class="modal-panel medium guide-panel">
+          <div class="modal-header">
+            <h3>畅玩指引 · 添加主屏幕与加速</h3>
+            <button class="modal-close" data-close="modal-mobile-guide">✕</button>
+          </div>
+          <div class="guide-body">
+            <div class="guide-card">
+              <div class="guide-card-title">📲 添加到手机主屏幕 · 全屏更流畅</div>
+              <ul class="guide-steps">
+                <li><strong>iPhone Safari</strong>：点击底部 <b>「分享 □↑」</b> → 下滑选择 <b>「添加到主屏幕」</b>，从桌面启动可全屏沉浸体验并稳定保留存档。</li>
+                <li><strong>安卓浏览器</strong>：点击菜单 <b>「⋮」</b> → 选择 <b>「添加到主屏幕 / 安装应用」</b>。</li>
+              </ul>
+            </div>
+            <div class="guide-card">
+              <div class="guide-card-head">
+                <span class="guide-card-title">🚀 在设置中开启 CDN 加速 · 加载不卡顿</span>
+                <span id="guide-cdn-badge" class="guide-badge">未开启</span>
+              </div>
+              <p class="guide-desc">
+                手机直连 GitHub 若图片或音乐加载较慢，请在 <b>「系统设置」</b> 中开启 <b>「GitHub 国内CDN图床加速」</b>（或点击下方按钮一键开启），切换场景与 BGM 更流畅。
+              </p>
+            </div>
+            <label class="guide-mute-label">
+              <input type="checkbox" id="guide-dont-show" />
+              <span>下次不再自动弹出此提示（可在标题页底部随时查看）</span>
+            </label>
+          </div>
+          <div class="config-footer guide-footer">
+            <button id="btn-guide-config" class="sub-btn" type="button">前往设置</button>
+            <button id="btn-guide-confirm" class="sub-btn primary" type="button">一键开启加速并开始</button>
+          </div>
         </div>
       </div>
 

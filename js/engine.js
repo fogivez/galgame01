@@ -261,6 +261,7 @@
         btnGallery: $("btn-gallery"),
         btnMusic: $("btn-music"),
         btnTitleConfig: $("btn-title-config"),
+        btnTitleGuide: $("btn-title-guide"),
         titleProgressHint: $("title-progress-hint"),
         endingScreen: $("ending-screen"),
         endingBadge: $("ending-badge"),
@@ -281,6 +282,11 @@
         cgLightboxCaption: $("cg-lightbox-caption"),
         modalMusic: $("modal-music"),
         musicList: $("music-list"),
+        modalMobileGuide: $("modal-mobile-guide"),
+        guideDontShow: $("guide-dont-show"),
+        guideCdnBadge: $("guide-cdn-badge"),
+        btnGuideConfig: $("btn-guide-config"),
+        btnGuideConfirm: $("btn-guide-confirm"),
         toast: $("toast")
       };
     }
@@ -294,6 +300,7 @@
             unlockedCGs: parsed.unlockedCGs || [],
             unlockedEndings: parsed.unlockedEndings || [],
             readSteps: parsed.readSteps || {},
+            hideMobileGuide: !!parsed.hideMobileGuide,
             config: Object.assign({}, DEFAULT_CONFIG, parsed.config || {})
           };
         }
@@ -302,6 +309,7 @@
         unlockedCGs: [],
         unlockedEndings: [],
         readSteps: {},
+        hideMobileGuide: false,
         config: Object.assign({}, DEFAULT_CONFIG)
       };
     }
@@ -344,6 +352,39 @@
       }
       this.preloadOpening();
       window.AudioMgr.playBGM("bgm_title");
+      this.maybeShowMobileGuide();
+    }
+
+    isStandaloneMode() {
+      return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || !!window.navigator.standalone;
+    }
+
+    maybeShowMobileGuide() {
+      if (!this.el.modalMobileGuide) return;
+      if (this.isStandaloneMode() || this.global.hideMobileGuide) return;
+      this.openMobileGuide();
+    }
+
+    openMobileGuide() {
+      if (!this.el.modalMobileGuide) return;
+      const cdnOn = !!(this.global && this.global.config && this.global.config.cdnAccel);
+      if (this.el.guideDontShow) {
+        this.el.guideDontShow.checked = !!this.global.hideMobileGuide;
+      }
+      if (this.el.guideCdnBadge) {
+        this.el.guideCdnBadge.textContent = cdnOn ? "✓ 已开启" : "未开启";
+        this.el.guideCdnBadge.classList.toggle("active", cdnOn);
+      }
+      if (this.el.btnGuideConfirm) {
+        this.el.btnGuideConfirm.textContent = cdnOn ? "知道了，开始游玩" : "一键开启加速并开始";
+      }
+      this.el.modalMobileGuide.classList.remove("hidden");
+    }
+
+    persistMobileGuidePref() {
+      if (!this.el.guideDontShow) return;
+      this.global.hideMobileGuide = !!this.el.guideDontShow.checked;
+      this.saveGlobal();
     }
 
     resolveAssetUrl(relPath, forceCdn = false) {
@@ -518,6 +559,43 @@
         window.AudioMgr.playSFX("click");
         this.el.modalConfig.classList.remove("hidden");
       });
+
+      if (this.el.btnTitleGuide) {
+        this.el.btnTitleGuide.addEventListener("click", () => {
+          window.AudioMgr.playSFX("click");
+          this.openMobileGuide();
+        });
+      }
+
+      if (this.el.guideDontShow) {
+        this.el.guideDontShow.addEventListener("change", () => {
+          this.persistMobileGuidePref();
+        });
+      }
+
+      if (this.el.btnGuideConfig) {
+        this.el.btnGuideConfig.addEventListener("click", () => {
+          window.AudioMgr.playSFX("click");
+          this.persistMobileGuidePref();
+          this.el.modalMobileGuide.classList.add("hidden");
+          this.el.modalConfig.classList.remove("hidden");
+        });
+      }
+
+      if (this.el.btnGuideConfirm) {
+        this.el.btnGuideConfirm.addEventListener("click", () => {
+          window.AudioMgr.playSFX("click");
+          const wasOn = !!this.global.config.cdnAccel;
+          if (!wasOn) {
+            this.global.config.cdnAccel = true;
+            this.assetCache.clear();
+            this.applyConfig();
+            this.showToast("已开启 GitHub CDN 加速");
+          }
+          this.persistMobileGuidePref();
+          this.el.modalMobileGuide.classList.add("hidden");
+        });
+      }
 
       this.el.btnEndingReturn.addEventListener("click", () => {
         window.AudioMgr.playSFX("click");

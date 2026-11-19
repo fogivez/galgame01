@@ -711,6 +711,106 @@ html, body {
   border-color: var(--accent-ice);
 }
 
+/* Mobile Install & Speed Guide */
+.footer-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgba(168, 199, 250, 0.85);
+  font-size: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.footer-link-btn:hover {
+  color: #fff;
+}
+
+.guide-panel {
+  width: 56cqw;
+  max-height: 50cqw;
+}
+
+.guide-body {
+  padding: 1.4cqw 2.0cqw;
+  display: flex;
+  flex-direction: column;
+  gap: 1.0cqw;
+  overflow-y: auto;
+}
+
+.guide-card {
+  background: rgba(20, 27, 46, 0.72);
+  border: 1px solid rgba(196, 216, 246, 0.22);
+  border-radius: 0.55cqw;
+  padding: 1.0cqw 1.25cqw;
+}
+
+.guide-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8cqw;
+  margin-bottom: 0.45cqw;
+}
+
+.guide-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.15cqw;
+  font-weight: 600;
+  color: #edf3ff;
+  display: block;
+  margin-bottom: 0.45cqw;
+}
+.guide-card-head .guide-card-title {
+  margin-bottom: 0;
+}
+
+.guide-badge {
+  font-size: 0.85cqw;
+  padding: 0.18cqw 0.6cqw;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(196, 216, 246, 0.28);
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.guide-badge.active {
+  background: rgba(68, 152, 118, 0.28);
+  border-color: rgba(126, 224, 184, 0.55);
+  color: #b7f5db;
+}
+
+.guide-steps {
+  margin: 0;
+  padding-left: 1.4cqw;
+  display: flex;
+  flex-direction: column;
+  gap: 0.38cqw;
+  font-size: 0.98cqw;
+  line-height: 1.55;
+  color: #d6e2f7;
+}
+
+.guide-desc {
+  margin: 0;
+  font-size: 0.98cqw;
+  line-height: 1.6;
+  color: #d6e2f7;
+}
+
+.guide-mute-label {
+  display: flex;
+  align-items: center;
+  gap: 0.55cqw;
+  font-size: 0.96cqw;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.guide-mute-label input {
+  accent-color: var(--accent-ice);
+}
+
 /* Gallery */
 .gallery-grid {
   padding: 1.6cqw 2.0cqw;
@@ -1063,6 +1163,17 @@ html, body {
   .music-row { padding: 12px; border-radius: 8px; }
   .music-title { font-size: 15px; }
   .music-sub { font-size: 12px; }
+
+  .guide-panel { max-height: 84dvh; }
+  .guide-body { padding: 14px 16px; gap: 12px; }
+  .guide-card { padding: 12px 14px; border-radius: 8px; }
+  .guide-card-title { font-size: 14px; margin-bottom: 6px; }
+  .guide-badge { font-size: 11px; padding: 2px 8px; }
+  .guide-steps { padding-left: 18px; gap: 6px; font-size: 13px; }
+  .guide-desc { font-size: 13px; }
+  .guide-mute-label { font-size: 12px; gap: 8px; }
+  .guide-footer { flex-wrap: wrap; justify-content: stretch; }
+  .guide-footer .sub-btn { flex: 1 1 auto; text-align: center; }
 
   #toast {
     top: 14px;
