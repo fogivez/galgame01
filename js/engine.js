@@ -332,6 +332,10 @@
 
     init(scenes) {
       this.scenes = scenes;
+      window.AudioMgr.setUrlResolver(
+        (relPath, forceCdn) => this.resolveAssetUrl(relPath, forceCdn),
+        () => { this.cdnAutoFallback = true; }
+      );
       const titleBgEl = document.querySelector(".title-bg");
       if (titleBgEl) {
         this.loadImageResilient(BG_FILES.bg_title, url => {
@@ -418,6 +422,8 @@
     preloadOpening() {
       [BG_FILES.bg_classroom, CHAR_FILES.yuma_normal, CHAR_FILES.shota_normal, CHAR_FILES.kaoru_normal]
         .forEach(p => this.enqueueAsset(p));
+      window.AudioMgr.preloadBGM("bgm_title");
+      window.AudioMgr.preloadBGM("bgm_daily");
     }
 
     preloadUpcoming(sceneId, startIdx) {
@@ -426,6 +432,7 @@
       const collectStep = (st) => {
         if (!st) return;
         if (st.bg && BG_FILES[st.bg]) this.enqueueAsset(BG_FILES[st.bg]);
+        if (st.bgm) window.AudioMgr.preloadBGM(st.bgm);
         if (st.cg) {
           const m = CG_META.find(c => c.id === st.cg);
           if (m) this.enqueueAsset(m.file);
@@ -474,8 +481,12 @@
 
     /* ==================== UI & EVENTS ==================== */
     bindEvents() {
-      document.addEventListener("pointerdown", () => window.AudioMgr.unlock());
-      document.addEventListener("touchstart", () => window.AudioMgr.unlock(), { passive: true });
+      const unlockAudio = () => window.AudioMgr.unlock();
+      document.addEventListener("pointerdown", unlockAudio, { passive: true });
+      document.addEventListener("touchstart", unlockAudio, { passive: true });
+      document.addEventListener("touchend", unlockAudio, { passive: true });
+      document.addEventListener("click", unlockAudio);
+      document.addEventListener("keydown", unlockAudio);
 
       this.el.btnNewGame.addEventListener("click", () => {
         window.AudioMgr.playSFX("click");
