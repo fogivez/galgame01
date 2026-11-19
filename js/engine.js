@@ -5,42 +5,56 @@
   const AUTO_KEY = "echoes_snow_autosave_v1";
 
   const CG_META = [
-    { id: "cg_kanade_library", title: "镜片后的秘密 · 九条奏", file: "assets/images/cg/cg_kanade_library.jpg" },
-    { id: "cg_kaoru_rooftop",  title: "黄昏的弦音 · 君安芳",   file: "assets/images/cg/cg_kaoru_rooftop.jpg" },
-    { id: "cg_rinne_snow",     title: "雪夜的眼泪 · 橘凛音",   file: "assets/images/cg/cg_rinne_snow.jpg" },
-    { id: "cg_finale_snow",    title: "初雪降临的瞬间 · 终章", file: "assets/images/cg/cg_finale_snow.jpg" }
+    { id: "cg_kanade_library",        title: "镜片后的秘密 · 九条奏",    file: "assets/images/cg/cg_kanade_library.webp" },
+    { id: "cg_kaoru_rooftop",         title: "黄昏的弦音 · 君安芳",      file: "assets/images/cg/cg_kaoru_rooftop.webp" },
+    { id: "cg_rinne_snow",            title: "雪夜的眼泪 · 橘凛音",      file: "assets/images/cg/cg_rinne_snow.webp" },
+    { id: "cg_shuraba_confrontation", title: "失温的合奏 · 旧部室之夜",  file: "assets/images/cg/cg_shuraba_confrontation.webp" },
+    { id: "cg_finale_snow",           title: "初雪降临的瞬间 · 终章",    file: "assets/images/cg/cg_finale_snow.webp" }
   ];
 
   const BG_FILES = {
-    bg_title:            "assets/images/bg/bg_title.jpg",
-    bg_clubroom:         "assets/images/bg/bg_clubroom.jpg",
-    bg_clubroom_night:   "assets/images/bg/bg_clubroom_night.jpg",
-    bg_classroom:        "assets/images/bg/bg_classroom.jpg",
-    bg_classroom_winter: "assets/images/bg/bg_classroom_winter.jpg",
-    bg_rooftop:          "assets/images/bg/bg_rooftop.jpg",
-    bg_rooftop_snow:     "assets/images/bg/bg_rooftop_snow.jpg",
-    bg_library:          "assets/images/bg/bg_library.jpg",
-    bg_music_room:       "assets/images/bg/bg_music_room.jpg",
-    bg_hallway:          "assets/images/bg/bg_hallway.jpg",
-    bg_hallway_night:    "assets/images/bg/bg_hallway_night.jpg",
-    bg_station_night:    "assets/images/bg/bg_station_night.jpg",
-    bg_winter_street:    "assets/images/bg/bg_winter_street.jpg",
-    bg_shopping_street:  "assets/images/bg/bg_shopping_street.jpg",
-    bg_room_rinne:       "assets/images/bg/bg_room_rinne.jpg",
-    bg_room_rinne_dark:  "assets/images/bg/bg_room_rinne_dark.jpg",
-    bg_street_snow:      "assets/images/bg/bg_street_snow.jpg"
+    bg_title:            "assets/images/bg/bg_title.webp",
+    bg_clubroom:         "assets/images/bg/bg_clubroom.webp",
+    bg_clubroom_night:   "assets/images/bg/bg_clubroom_night.webp",
+    bg_classroom:        "assets/images/bg/bg_classroom.webp",
+    bg_classroom_winter: "assets/images/bg/bg_classroom_winter.webp",
+    bg_rooftop:          "assets/images/bg/bg_rooftop.webp",
+    bg_rooftop_snow:     "assets/images/bg/bg_rooftop_snow.webp",
+    bg_library:          "assets/images/bg/bg_library.webp",
+    bg_music_room:       "assets/images/bg/bg_music_room.webp",
+    bg_hallway:          "assets/images/bg/bg_hallway.webp",
+    bg_hallway_night:    "assets/images/bg/bg_hallway_night.webp",
+    bg_station_night:    "assets/images/bg/bg_station_night.webp",
+    bg_winter_street:    "assets/images/bg/bg_winter_street.webp",
+    bg_shopping_street:  "assets/images/bg/bg_shopping_street.webp",
+    bg_room_rinne:       "assets/images/bg/bg_room_rinne.webp",
+    bg_room_rinne_dark:  "assets/images/bg/bg_room_rinne_dark.webp",
+    bg_street_snow:      "assets/images/bg/bg_street_snow.webp"
   };
 
   const CHAR_FILES = {
-    kanade_normal:  "assets/images/char/kanade_normal.png",
-    kanade_glasses: "assets/images/char/kanade_glasses.png",
-    kanade_sad:     "assets/images/char/kanade_sad.png",
-    kaoru_normal:   "assets/images/char/kaoru_normal.png",
-    kaoru_happy:    "assets/images/char/kaoru_happy.png",
-    kaoru_sad:      "assets/images/char/kaoru_sad.png",
-    rinne_tsun:     "assets/images/char/rinne_tsun.png",
-    rinne_normal:   "assets/images/char/rinne_normal.png",
-    rinne_cry:      "assets/images/char/rinne_cry.png"
+    kanade_normal:  "assets/images/char/kanade_normal.webp",
+    kanade_glasses: "assets/images/char/kanade_glasses.webp",
+    kanade_sad:     "assets/images/char/kanade_sad.webp",
+    kanade_hold:    "assets/images/char/kanade_hold.webp",
+    kanade_side:    "assets/images/char/kanade_side.webp",
+    kanade_smile:   "assets/images/char/kanade_smile.webp",
+    kanade_think:   "assets/images/char/kanade_think.webp",
+    kaoru_normal:   "assets/images/char/kaoru_normal.webp",
+    kaoru_happy:    "assets/images/char/kaoru_happy.webp",
+    kaoru_sad:      "assets/images/char/kaoru_sad.webp",
+    kaoru_shy:      "assets/images/char/kaoru_shy.webp",
+    kaoru_look:     "assets/images/char/kaoru_look.webp",
+    kaoru_guitar:   "assets/images/char/kaoru_guitar.webp",
+    kaoru_ear:      "assets/images/char/kaoru_ear.webp",
+    rinne_tsun:     "assets/images/char/rinne_tsun.webp",
+    rinne_normal:   "assets/images/char/rinne_normal.webp",
+    rinne_cry:      "assets/images/char/rinne_cry.webp",
+    rinne_shy:      "assets/images/char/rinne_shy.webp",
+    rinne_smile:    "assets/images/char/rinne_smile.webp",
+    rinne_hip:      "assets/images/char/rinne_hip.webp",
+    shota_normal:   "assets/images/char/shota_normal.webp",
+    yuma_normal:    "assets/images/char/yuma_normal.webp"
   };
 
   const DEFAULT_CONFIG = {
@@ -49,8 +63,22 @@
     bgmVol: 65,
     sfxVol: 75,
     skipMode: "read",
-    particles: true
+    particles: true,
+    cdnAccel: false
   };
+
+  function detectGitHubCDNBase() {
+    try {
+      const host = window.location.hostname || "";
+      if (!host.endsWith(".github.io")) return null;
+      const owner = host.split(".")[0];
+      const parts = (window.location.pathname || "/").split("/").filter(Boolean);
+      const repo = (parts.length > 0 && !parts[0].includes(".")) ? parts[0] : `${owner}.github.io`;
+      return `https://cdn.jsdelivr.net/gh/${owner}/${repo}@HEAD/`;
+    } catch (e) {
+      return null;
+    }
+  }
 
   /* ==================== PARTICLE SYSTEM ==================== */
   class ParticleSystem {
@@ -181,6 +209,12 @@
       this.inGame = false;
       this.waitingChoice = false;
       this.saveLoadAction = "save";
+      this.cdnBase = detectGitHubCDNBase();
+      this.cdnAutoFallback = false;
+      this.assetCache = new Map();
+      this.preloadQueue = [];
+      this.queuedSet = new Set();
+      this.inFlightLoads = 0;
 
       this.cacheDOM();
       this.particles = new ParticleSystem(this.el.particleCanvas);
@@ -289,7 +323,7 @@
         date: "11月24日 · 周五",
         location: "樱见丘学园 · 2年B组",
         sprites: { left: null, center: null, right: null },
-        affection: { kanade: 0, kaoru: 0, rinne: 0 },
+        affection: { kanade: 0, kaoru: 0, rinne: 0, hesitation: 0 },
         flags: {},
         backlog: [],
         lastLine: ""
@@ -298,15 +332,121 @@
 
     init(scenes) {
       this.scenes = scenes;
-      this.preloadAssets();
+      const titleBgEl = document.querySelector(".title-bg");
+      if (titleBgEl) {
+        this.loadImageResilient(BG_FILES.bg_title, url => {
+          titleBgEl.style.backgroundImage = `url('${url}')`;
+        });
+      }
+      this.preloadOpening();
       window.AudioMgr.playBGM("bgm_title");
     }
 
-    preloadAssets() {
-      Object.values(BG_FILES).concat(Object.values(CHAR_FILES)).forEach(src => {
-        const img = new Image();
-        img.src = src;
-      });
+    resolveAssetUrl(relPath, forceCdn = false) {
+      if (!relPath) return "";
+      if (this.assetCache.has(relPath)) return this.assetCache.get(relPath);
+      const useCdn = forceCdn || (this.global && this.global.config && this.global.config.cdnAccel) || this.cdnAutoFallback;
+      if (useCdn && this.cdnBase) return this.cdnBase + relPath;
+      return relPath;
+    }
+
+    loadImageResilient(relPath, callback) {
+      if (!relPath) return;
+      if (this.assetCache.has(relPath)) {
+        if (callback) callback(this.assetCache.get(relPath));
+        return;
+      }
+      const primaryUrl = this.resolveAssetUrl(relPath, false);
+      const cdnUrl = (this.cdnBase && primaryUrl !== this.cdnBase + relPath) ? (this.cdnBase + relPath) : null;
+      let done = false;
+      let timer = null;
+
+      const finish = (finalUrl) => {
+        if (done) return;
+        done = true;
+        if (timer) clearTimeout(timer);
+        this.assetCache.set(relPath, finalUrl);
+        if (callback) callback(finalUrl);
+      };
+
+      const tryFallbackOrRetry = () => {
+        if (done) return;
+        if (cdnUrl) {
+          this.cdnAutoFallback = true;
+          const img2 = new Image();
+          img2.decoding = "async";
+          img2.onload = () => finish(cdnUrl);
+          img2.onerror = () => finish(relPath);
+          img2.src = cdnUrl;
+          return;
+        }
+        const imgRetry = new Image();
+        imgRetry.decoding = "async";
+        imgRetry.onload = () => finish(primaryUrl);
+        imgRetry.onerror = () => finish(primaryUrl);
+        imgRetry.src = primaryUrl + (primaryUrl.includes("?") ? "&" : "?") + "r=1";
+      };
+
+      const img = new Image();
+      img.decoding = "async";
+      img.onload = () => finish(primaryUrl);
+      img.onerror = tryFallbackOrRetry;
+      timer = setTimeout(tryFallbackOrRetry, 5000);
+      img.src = primaryUrl;
+    }
+
+    enqueueAsset(relPath) {
+      if (!relPath || this.assetCache.has(relPath) || this.queuedSet.has(relPath)) return;
+      this.queuedSet.add(relPath);
+      this.preloadQueue.push(relPath);
+      this.pumpPreloadQueue();
+    }
+
+    pumpPreloadQueue() {
+      while (this.inFlightLoads < 2 && this.preloadQueue.length > 0) {
+        const relPath = this.preloadQueue.shift();
+        this.queuedSet.delete(relPath);
+        if (this.assetCache.has(relPath)) continue;
+        this.inFlightLoads++;
+        this.loadImageResilient(relPath, () => {
+          this.inFlightLoads = Math.max(0, this.inFlightLoads - 1);
+          this.pumpPreloadQueue();
+        });
+      }
+    }
+
+    preloadOpening() {
+      [BG_FILES.bg_classroom, CHAR_FILES.yuma_normal, CHAR_FILES.shota_normal, CHAR_FILES.kaoru_normal]
+        .forEach(p => this.enqueueAsset(p));
+    }
+
+    preloadUpcoming(sceneId, startIdx) {
+      const scene = this.scenes[sceneId];
+      if (!scene) return;
+      const collectStep = (st) => {
+        if (!st) return;
+        if (st.bg && BG_FILES[st.bg]) this.enqueueAsset(BG_FILES[st.bg]);
+        if (st.cg) {
+          const m = CG_META.find(c => c.id === st.cg);
+          if (m) this.enqueueAsset(m.file);
+        }
+        if (st.sprites) {
+          Object.values(st.sprites).forEach(k => {
+            if (k && CHAR_FILES[k]) this.enqueueAsset(CHAR_FILES[k]);
+          });
+        }
+      };
+      const endIdx = Math.min(scene.length, startIdx + 10);
+      for (let i = startIdx; i < endIdx; i++) {
+        const st = scene[i];
+        collectStep(st);
+        if (st.goto && this.scenes[st.goto]) collectStep(this.scenes[st.goto][0]);
+        if (st.choice) {
+          st.choice.forEach(opt => {
+            if (opt.goto && this.scenes[opt.goto]) collectStep(this.scenes[opt.goto][0]);
+          });
+        }
+      }
     }
 
     /* ==================== CONFIG ==================== */
@@ -325,6 +465,8 @@
       document.getElementById("cfg-sfx-vol").value = c.sfxVol;
       document.getElementById("val-sfx-vol").textContent = c.sfxVol + "%";
       document.getElementById("cfg-particles").checked = c.particles;
+      const cdnEl = document.getElementById("cfg-cdn");
+      if (cdnEl) cdnEl.checked = !!c.cdnAccel;
       document.querySelectorAll('input[name="skip-mode"]').forEach(el => {
         el.checked = el.value === c.skipMode;
       });
@@ -456,6 +598,16 @@
         this.saveGlobal();
       });
 
+      const cdnEl = document.getElementById("cfg-cdn");
+      if (cdnEl) {
+        cdnEl.addEventListener("change", e => {
+          this.global.config.cdnAccel = e.target.checked;
+          this.assetCache.clear();
+          this.saveGlobal();
+          this.showToast(e.target.checked ? "已开启 GitHub CDN 加速" : "已切换回直连资源");
+        });
+      }
+
       document.querySelectorAll('input[name="skip-mode"]').forEach(r => {
         r.addEventListener("change", e => {
           if (e.target.checked) {
@@ -526,7 +678,7 @@
       const ends = this.global.unlockedEndings.length;
       const cgs = this.global.unlockedCGs.length;
       this.el.titleProgressHint.textContent = (ends > 0 || cgs > 0)
-        ? `结局达成 ${ends}/7 · CG收集 ${cgs}/${CG_META.length}`
+        ? `结局达成 ${ends}/9 · CG收集 ${cgs}/${CG_META.length}`
         : "";
     }
 
@@ -588,9 +740,14 @@
       // Handle pure control jumps/branches first
       if (step.branch) {
         const target = step.branch(this.state);
-        this.state.sceneId = target;
-        this.state.stepIdx = 0;
-        this.autoSave();
+        if (target) {
+          this.state.sceneId = target;
+          this.state.stepIdx = 0;
+          this.autoSave();
+          this.runStep();
+          return;
+        }
+        this.state.stepIdx++;
         this.runStep();
         return;
       }
@@ -688,6 +845,7 @@
       if (this.state.backlog.length > 150) this.state.backlog.shift();
 
       this.autoSave();
+      this.preloadUpcoming(this.state.sceneId, this.state.stepIdx + 1);
       this.revealText(text, isRead);
     }
 
@@ -788,6 +946,9 @@
           if (opt.flag) {
             this.state.flags[opt.flag] = true;
           }
+          if (opt.flagSet) {
+            Object.assign(this.state.flags, opt.flagSet);
+          }
           this.state.backlog.push({ speaker: "【选择】", text: opt.text });
           this.el.choiceOverlay.classList.add("hidden");
           this.waitingChoice = false;
@@ -817,22 +978,30 @@
     }
 
     setBackground(bgKey, instant = false) {
-      const url = BG_FILES[bgKey];
-      if (!url) return;
-      if (instant) {
-        this.el.bgBack.style.backgroundImage = `url('${url}')`;
-        this.el.bgFront.style.opacity = "0";
-        return;
+      const rel = BG_FILES[bgKey];
+      if (!rel) return;
+      const applyBg = (resolvedUrl) => {
+        if (this.state.bg !== bgKey && !instant) return;
+        if (instant) {
+          this.el.bgBack.style.backgroundImage = `url('${resolvedUrl}')`;
+          this.el.bgFront.style.opacity = "0";
+          return;
+        }
+        this.el.bgFront.style.backgroundImage = `url('${resolvedUrl}')`;
+        this.el.bgFront.style.opacity = "1";
+        setTimeout(() => {
+          this.el.bgBack.style.backgroundImage = `url('${resolvedUrl}')`;
+          this.el.bgFront.style.transition = "none";
+          this.el.bgFront.style.opacity = "0";
+          void this.el.bgFront.offsetWidth;
+          this.el.bgFront.style.transition = "";
+        }, 760);
+      };
+      if (this.assetCache.has(rel)) {
+        applyBg(this.assetCache.get(rel));
+      } else {
+        this.loadImageResilient(rel, applyBg);
       }
-      this.el.bgFront.style.backgroundImage = `url('${url}')`;
-      this.el.bgFront.style.opacity = "1";
-      setTimeout(() => {
-        this.el.bgBack.style.backgroundImage = `url('${url}')`;
-        this.el.bgFront.style.transition = "none";
-        this.el.bgFront.style.opacity = "0";
-        void this.el.bgFront.offsetWidth;
-        this.el.bgFront.style.transition = "";
-      }, 760);
     }
 
     setCG(cgKey) {
@@ -849,9 +1018,17 @@
         this.global.unlockedCGs.push(cgKey);
         this.saveGlobal();
       }
-      this.el.cgLayer.style.backgroundImage = `url('${meta.file}')`;
-      this.el.cgLayer.classList.remove("hidden");
-      requestAnimationFrame(() => this.el.cgLayer.classList.add("active"));
+      const applyCG = (resolvedUrl) => {
+        if (this.state.cg !== cgKey) return;
+        this.el.cgLayer.style.backgroundImage = `url('${resolvedUrl}')`;
+        this.el.cgLayer.classList.remove("hidden");
+        requestAnimationFrame(() => this.el.cgLayer.classList.add("active"));
+      };
+      if (this.assetCache.has(meta.file)) {
+        applyCG(this.assetCache.get(meta.file));
+      } else {
+        this.loadImageResilient(meta.file, applyCG);
+      }
     }
 
     renderSprites(activeSlot) {
@@ -873,7 +1050,21 @@
         }
         if (container.dataset.key !== key) {
           container.dataset.key = key;
-          container.innerHTML = `<img src="${CHAR_FILES[key]}" alt="${key}" />`;
+          const rel = CHAR_FILES[key];
+          const src = this.resolveAssetUrl(rel);
+          const img = document.createElement("img");
+          img.alt = key;
+          img.decoding = "async";
+          img.onerror = () => {
+            if (img.dataset.retried) return;
+            img.dataset.retried = "1";
+            this.loadImageResilient(rel, (fallbackUrl) => {
+              if (container.dataset.key === key) img.src = fallbackUrl;
+            });
+          };
+          img.src = src;
+          container.innerHTML = "";
+          container.appendChild(img);
         }
         container.classList.add("visible");
         container.classList.remove("speaking", "dimmed");
@@ -1048,7 +1239,7 @@
         date: data.date,
         location: data.location,
         sprites: Object.assign({ left: null, center: null, right: null }, data.sprites),
-        affection: Object.assign({ kanade: 0, kaoru: 0, rinne: 0 }, data.affection),
+        affection: Object.assign({ kanade: 0, kaoru: 0, rinne: 0, hesitation: 0 }, data.affection),
         flags: Object.assign({}, data.flags),
         backlog: data.backlog ? data.backlog.slice() : [],
         lastLine: data.lastLine || ""
@@ -1087,9 +1278,10 @@
         const card = document.createElement("div");
         card.className = "gallery-card" + (unlocked ? "" : " locked");
         if (unlocked) {
-          card.innerHTML = `<img src="${cg.file}" alt="${cg.title}" /><div class="gallery-label">${cg.title}</div>`;
+          const url = this.resolveAssetUrl(cg.file);
+          card.innerHTML = `<img src="${url}" alt="${cg.title}" /><div class="gallery-label">${cg.title}</div>`;
           card.addEventListener("click", () => {
-            this.el.cgLightboxImg.src = cg.file;
+            this.el.cgLightboxImg.src = this.resolveAssetUrl(cg.file);
             this.el.cgLightboxCaption.textContent = cg.title;
             this.el.cgLightbox.classList.remove("hidden");
           });
@@ -1137,7 +1329,7 @@
       this.el.endingBadge.textContent = ending.badge || "ENDING";
       this.el.endingTitle.textContent = ending.title;
       this.el.endingDesc.textContent = ending.desc;
-      this.el.endingStats.textContent = `已解锁结局：${this.global.unlockedEndings.length} / 7 ｜ 已收集CG：${this.global.unlockedCGs.length} / ${CG_META.length}`;
+      this.el.endingStats.textContent = `已解锁结局：${this.global.unlockedEndings.length} / 9 ｜ 已收集CG：${this.global.unlockedCGs.length} / ${CG_META.length}`;
       this.el.endingScreen.classList.remove("hidden");
     }
 

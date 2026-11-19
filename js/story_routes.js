@@ -17,24 +17,24 @@ window.STORY_ROUTES = {
     {
       sprites: { center: "kanade_glasses" }, active: "center",
       s: "九条奏", cls: "kanade",
-      t: "「九分四十秒。……你差二十秒就赶不上了，白石。」"
+      t: "「九分四十秒。……差一点，我就以为你不会推开这扇门了，白石。」"
     },
     {
       s: "白石悠真", cls: "yuma",
-      t: "「学姐，别签那张纸！昨晚在部室里我不敢回答……不是因为我在逃避你，是因为我怕自己没有资格去承载你压上整个人生的赌注。」"
+      t: "「学姐，别签那张纸。昨晚在部室里我没能开口……不是因为想逃，是因为我终于明白，如果连自己都不肯承受得罪任何人的代价，我就没有资格接住你退掉机票的那份决绝。」"
     },
     {
-      sprites: { center: "kanade_normal" }, active: "center",
-      t: "她缓缓摘下银丝眼镜，“啪”地一声合上镜腿放在桌上。没有了镜片的遮挡，她那双黑曜石般的眼眸里翻涌着几乎要将人吞没的执拗与锋芒。"
+      sprites: { center: "kanade_side" }, active: "center",
+      t: "她缓缓摘下银丝眼镜，“啪”地一声合上镜腿放在确认书上。没有了镜片的隔阂，那双深黑色的眼眸安静地望过来，里面不再是高不可攀的锋芒，而是几乎要将人拽进深冬的沉重。"
     },
     {
       s: "九条奏", cls: "kanade",
-      t: "「没资格？那现在呢？君安芳和橘凛音都在下面等着你去哄她们。你跑来这里，就意味着要亲手打破你维持了半年的“好人”面具了。」"
+      t: "「现在想通了？楼下还有两个在等你给出交代的人。你站到这里，就意味着从今晚起，你再也不能当那个让所有人都觉得体贴的“好人”了。」"
     },
     {
       sprites: { center: "kanade_sad" }, active: "center",
       s: "九条奏", cls: "kanade",
-      t: "「说出来吧，白石悠真——如果为了留住我，你必须背叛她们的期待、成为最自私的共犯，你还敢握住我的手吗？」"
+      t: "「回答我，白石悠真——哪怕要亲手辜负她们，哪怕以后要和我一起背着这份愧疚走下去，你还是愿意把手伸过来吗？」"
     },
     {
       choice: [
@@ -95,9 +95,24 @@ window.STORY_ROUTES = {
       t: "「别说了！再多说一句我真的会恨你一辈子……走吧，别让九条前辈等太久。既然选了她，就给我负起责任到死啊，白石悠真！」"
     },
     {
-      t: "说完这句话，凛音抹了一把脸上的泪水，转身头也不回地冲进了教学楼外的暴雪里。"
+      t: "说完这句话，凛音抹了一把脸上的泪水，转身头也不回地冲进了教学楼外的暴雪里。两张折得起毛的室内乐门票滑落在楼梯拐角。"
     },
-    { goto: "route_kanade_3" }
+    {
+      choice: [
+        {
+          text: "站在原地没有去追，目送她的背影彻底消失在暴雪夜色里",
+          effects: { kanade: 2 },
+          flag: "kanade_route_resolve",
+          goto: "route_kanade_3"
+        },
+        {
+          text: "下意识追下两级台阶弯腰捡起门票：“凛音——至少先把票拿回去吧……”",
+          effects: { kanade: -2, hesitation: 1 },
+          flag: "kanade_route_wavered",
+          goto: "route_kanade_3"
+        }
+      ]
+    }
   ],
 
   route_kanade_3: [
@@ -162,10 +177,53 @@ window.STORY_ROUTES = {
   route_kanade_climax: [
     {
       branch: function (state) {
-        if (state.affection.kanade >= 2 || state.flags.kanade_tear_paper) {
+        if (state.flags.kanade_tear_paper && state.flags.kanade_route_resolve && state.affection.kanade >= 5) {
           return "route_kanade_true";
         }
+        if (state.flags.kanade_tear_paper || state.affection.kanade >= 3) {
+          return "route_kanade_normal";
+        }
         return "route_kanade_bitter";
+      }
+    }
+  ],
+
+  route_kanade_normal: [
+    {
+      bg: "bg_station_night",
+      bgm: "bgm_kanade",
+      weather: "snow",
+      date: "12月23日 · 清晨",
+      location: "樱见丘电车站 · 机场快线站台",
+      clearSprites: true,
+      sprites: { center: "kanade_side" }, active: "center",
+      t: "冬至广播结束后的第二天清晨。我在高架站台的检票口外拦住了拖着深色登机箱的九条奏。她重新戴上了那副银丝眼镜，大衣扣子一丝不苟地系到最上方一颗。"
+    },
+    {
+      s: "九条奏", cls: "kanade",
+      t: "「……昨晚播完那段录音以后，我已经很知足了，白石。只是那天在楼梯转角，你还是忍不住想去捡那张掉下来的门票吧？」"
+    },
+    {
+      s: "白石悠真", cls: "yuma",
+      t: "「学姐，那只是……」"
+    },
+    {
+      sprites: { center: "kanade_smile" }, active: "center",
+      s: "九条奏", cls: "kanade",
+      t: "「嘘。不用再勉强自己挑什么好听的话说了。」"
+    },
+    {
+      t: "她从大衣口袋里摸出一盘标签工整的新磁带塞进我掌心——那是我随身听里去年空着的那半段，已经由她自己在冬至夜后独自录完了收尾和弦。"
+    },
+    {
+      t: "机场快线的车灯穿透风雪缓缓驶进站台。车门合上的一刻，她站在玻璃窗后轻轻朝我颔首，这一次没有回头。"
+    },
+    {
+      ending: {
+        id: "end_kanade_normal",
+        badge: "KANADE NORMAL END",
+        title: "单程航班的未完乐章",
+        desc: "你们一同弹完了冬至夜的最后一段录音，却终究没能彻底跨过心底那半步迟疑。她收起所有的锋芒与执拗独自飞往伦敦，只把那盘完整却无人的磁带留在了你的冬天。"
       }
     }
   ],
@@ -356,7 +414,7 @@ window.STORY_ROUTES = {
       t: "回到空无一人的广播室，我们重新调整了直播台位——我把自己的监听麦和节拍灯移到了她的右侧，并在她左肘边摆了一台能随着鼓点闪烁微光的旧节拍器。"
     },
     {
-      sprites: { center: "kaoru_normal" }, active: "center",
+      sprites: { center: "kaoru_guitar" }, active: "center",
       s: "君安芳", cls: "kaoru",
       t: "「呐，悠真君……把你的手按在吉他的低音弦旁边好不好？像这样。」"
     },
@@ -368,7 +426,21 @@ window.STORY_ROUTES = {
       s: "君安芳", cls: "kaoru",
       t: "「以前我总觉得，听不见声音就是彻底被关进了黑屋子里。可是今天看着节拍器的灯一闪一闪，又感觉到你的掌心就在我右手边……忽然觉得，好像也没有那么可怕了。」"
     },
-    { goto: "route_kaoru_4" }
+    {
+      choice: [
+        {
+          text: "“趁今晚还没睡，我把右声道标注好的完整谱面发给奏和凛音，明天让所有人知道你在用什么办法合奏！”",
+          effects: { kaoru: 2 },
+          flag: "kaoru_open_truth",
+          goto: "route_kaoru_4"
+        },
+        {
+          text: "“只要你点头，后面的主控台交给我，我们俩就像这样安静把直播撑过去就好。”",
+          effects: { kaoru: 1, hesitation: 1 },
+          goto: "route_kaoru_4"
+        }
+      ]
+    }
   ],
 
   route_kaoru_4: [
@@ -389,14 +461,21 @@ window.STORY_ROUTES = {
       t: "几乎在同一秒，我直接握住了她拨片停顿的右手腕，用指节轻轻在她膝盖侧敲出稳定的四拍节奏，同时凑近她右耳边的麦克风，和她一起唱出了第一句副歌。"
     },
     {
-      sprites: { center: "kaoru_happy" }, active: "center",
+      sprites: { center: "kaoru_ear" }, active: "center",
       s: "君安芳", cls: "kaoru",
       t: "「……！」"
     },
     {
       t: "她微红着眼眶抬起头看我，随即扬起嘴角，顺着我的声线把最后一整段高潮清亮而坚定地弹唱到了尾声。"
     },
-    { goto: "route_kaoru_true" }
+    {
+      branch: function (state) {
+        if ((state.flags.kaoru_open_truth || state.affection.kaoru >= 5) && state.flags.kaoru_resonance) {
+          return "route_kaoru_true";
+        }
+        return "route_kaoru_bitter";
+      }
+    }
   ],
 
   route_kaoru_true: [
@@ -467,41 +546,41 @@ window.STORY_ROUTES = {
       t: "我冲出校门时，橘凛音正独自站在光秃秃的银杏树下，厚围巾上积了一层厚厚的雪。听到身后的踏雪声，她下意识回过头，随即又故作镇定地把脸扭向一边。"
     },
     {
-      sprites: { center: "rinne_tsun" }, active: "center",
+      sprites: { center: "rinne_shy" }, active: "center",
       s: "橘凛音", cls: "rinne",
-      t: "「干嘛跑这么急啊笨蛋悠真！九条前辈和君安同学不都在楼里吗，你跑出来找我干嘛……」"
+      t: "「……跑这么急干什么，鞋带都散了。楼里还有人在等你吧，出来找我算怎么回事。」"
     },
     {
       s: "白石悠真", cls: "yuma",
-      t: "「因为我知道，如果我不出来叫住你，你肯定又要一个人走回那栋黑灯瞎火的老屋二楼，然后在被窝里嘴硬说“一个人也没什么大不了”吧。」"
+      t: "「因为我知道，如果今晚我不追出来叫住你，你明天早上还是会像什么都没发生过一样，站在路口问我为什么还没出门。」"
     },
     {
       cg: "cg_rinne_snow",
       sfx: "heartbeat",
       s: "橘凛音", cls: "rinne",
-      t: "「……！你、你少自作聪明了！我哪有那么脆弱……」"
+      t: "「……少自作聪明了。你以为你很了解我吗？」"
     },
     {
-      t: "然而她话说到一半，声音却忽然哽住了。滚烫的眼泪顺着冻红的脸颊滑下来，砸进厚毛衣的领口里。"
-    },
-    {
-      s: "橘凛音", cls: "rinne",
-      t: "「呜……混蛋悠真！为什么偏偏在这个时候这么敏锐啊……我明明都已经做好心理准备了，做好准备看着你像别人一样被更优秀、更耀眼的人带走……」"
+      t: "话说到一半，她的声音却骤然低了下去。滚烫的眼泪顺着冻得发红的眼尾滑落，无声地融进深灰色的毛衣领口。"
     },
     {
       s: "橘凛音", cls: "rinne",
-      t: "「九条前辈那么聪明漂亮，君安同学那么温柔体贴……只有我，是个父母不在了、连剑道都因为手腕废掉而打不了全国大赛的笨蛋青梅竹马！我除了每天对你大呼小叫，还能用什么办法留住你啊！」"
+      t: "「为什么偏偏到了这种时候才突然变得这么敏锐啊……我明明都已经想好了，只要装作不在意，就能看着你去选那个更耀眼、或者更需要你照顾的人。」"
+    },
+    {
+      s: "橘凛音", cls: "rinne",
+      t: "「九条前辈有和你一起录完的磁带，君安同学有只告诉过你的秘密……而我呢？剑道部停训以后，我连能拿得出手的东西都没有了。我每天只知道冲你发脾气、顺路帮你带早饭，除了这些，我根本不知道还能用什么把你留在身边。」"
     },
     {
       choice: [
         {
-          text: "上前把浑身冰凉的她紧紧抱进怀里：“笨蛋，我这辈子哪儿也不去，就在你身边。”",
+          text: "上前把浑身发冷的她拥进怀里：“不用再替我数着哪天会走了。这个冬天，还有以后的每一个冬天，我都在你这边。”",
           effects: { rinne: 3 },
           flag: "rinne_hug",
           goto: "route_rinne_2"
         },
         {
-          text: "拍拍她的肩膀：“别瞎想，不管什么时候我们都是最好的青梅竹马。”",
+          text: "抬手替她拂去肩上的雪：“别胡思乱想了，不管以后怎样，我们永远是最好的朋友。”",
           effects: { rinne: -2 },
           goto: "route_rinne_bitter"
         }
@@ -545,9 +624,23 @@ window.STORY_ROUTES = {
       t: "「怎么会呢……凛音酱才不是小偷。从一开始，那个十年来一直站在他身边的位子就是你的啊。我只是……贪心地多坐了一会儿而已。」"
     },
     {
-      t: "凛音吸了吸鼻子，接过台本紧紧抱在胸前，重重地鞠了一躬。"
+      t: "话音未落，橘凛音咬着下唇突然往后退了半步，似乎想要把怀里的台本硬塞回给芳、自己先一步逃出这间让人喘不过气的部室——"
     },
-    { goto: "route_rinne_3" }
+    {
+      choice: [
+        {
+          text: "上前一把攥住凛音的手腕：“别推给任何人，十年来一直站在那个位子的人就是你。”",
+          effects: { rinne: 2 },
+          flag: "rinne_firm_answer",
+          goto: "route_rinne_3"
+        },
+        {
+          text: "看着门内脸色苍白的芳，犹豫着松开手指，轻声说：“今天大家都太累了，先各自冷静两天吧……”",
+          effects: { rinne: -2, hesitation: 2 },
+          goto: "route_rinne_bitter"
+        }
+      ]
+    }
   ],
 
   route_rinne_3: [
@@ -699,6 +792,58 @@ window.STORY_ROUTES = {
         badge: "NORMAL END",
         title: "冬日未寄出的信",
         desc: "你保护了所有人的体面，唯独错过了握住任何一只手的时机。漫长的冬天结束了，故事却留在了原地。"
+      }
+    }
+  ],
+
+  /* ==================== TRIANGLE CRISIS END (WA2多线崩塌) ==================== */
+  route_triangle_crisis: [
+    {
+      bg: "bg_hallway_night",
+      bgm: "bgm_tension",
+      weather: "snow_heavy",
+      date: "12月18日 · 夜（崩塌之后）",
+      location: "旧校舍 → 樱见丘街角",
+      clearSprites: true,
+      sfx: "door",
+      t: "我一路气喘吁吁地赶到旧图书馆三楼时，长桌上只留下一只已经冷透的空咖啡罐；折返音乐室推开门，吉他架空荡荡地立在暮色里；等跑出校门，银杏树下的雪地也只剩半行很快被新雪抹平的脚印。"
+    },
+    {
+      t: "因为之前每一次试图向谁靠近时，总还要分出三分心思替另外两个人遮风挡雨；到头来，哪怕在最后一秒急着给出承诺，也已经没有人敢再把后背交到我手里。"
+    },
+    {
+      bg: "bg_clubroom_night",
+      bgm: "bgm_tension",
+      weather: "snow_heavy",
+      date: "12月22日 · 冬至夜六点半",
+      location: "旧校舍 · 熄灯的广播室",
+      clearSprites: true,
+      t: "冬至的钟声敲响六下半时，风雪拍打着旧校舍三楼的窗玻璃。老式调音台的红色电源灯静静亮着，可木桌四周的三把椅子全都空着。"
+    },
+    {
+      sprites: { left: "yuma_normal", right: "shota_normal" }, active: "right",
+      s: "相泽翔太", cls: "npc",
+      t: "「……别等了，悠真。教导处的藤堂老师刚才打电话去楼下广播室问了，九条前辈把剪好的纯背景配乐磁带托门口保安大叔送来了。」"
+    },
+    {
+      s: "白石悠真", cls: "yuma",
+      t: "「那芳和凛音呢……」"
+    },
+    {
+      sprites: { left: "yuma_normal", right: "shota_normal" }, active: "right",
+      s: "相泽翔太", cls: "npc",
+      t: "「君安同学提前一天转去专科住院观察了；凛音下午给社团钥匙柜塞了一张请假条，说家里有事。谁都没闹，也没人怪你——但有些东西一旦在半途耗光了信任，就算把直播放完，也接不回原来的音轨了。」"
+    },
+    {
+      clearSprites: true,
+      t: "广播线路如期在六点三十五分切入了那段没有旁白、也没有木吉他合奏的孤独钢琴录音。空无一人的教室里，风雪声穿过门缝，长长久久地回荡着。"
+    },
+    {
+      ending: {
+        id: "end_triangle_collapse",
+        badge: "CRISIS END",
+        title: "雪夜熄灯的广播室",
+        desc: "你一直试图在不伤害任何人的前提下留下所有人，却在接二连三的动摇与隐瞒里耗尽了最后的信任。冬至的广播如期响起，却再也没有人站在麦克风前等你。"
       }
     }
   ]

@@ -6,6 +6,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
   <title>雪落时分的残响 — Echoes Before the Snowfall</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❄️</text></svg>" />
+  <link rel="preload" as="image" href="assets/images/bg/bg_title.webp" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -73,7 +75,7 @@
 
       <!-- ==================== TITLE SCREEN ==================== -->
       <div id="title-screen">
-        <div class="title-bg" style="background-image: url('assets/images/bg/bg_title.jpg');"></div>
+        <div class="title-bg" style="background-image: url('assets/images/bg/bg_title.webp');"></div>
         <div class="title-vignette"></div>
         <canvas id="title-snow-canvas"></canvas>
 
@@ -174,6 +176,13 @@
               <label class="switch">
                 <input type="checkbox" id="cfg-particles" checked />
                 <span>开启</span>
+              </label>
+            </div>
+            <div class="config-row toggle-row">
+              <label>GitHub 国内CDN图床加速</label>
+              <label class="switch">
+                <input type="checkbox" id="cfg-cdn" />
+                <span>手机推荐</span>
               </label>
             </div>
           </div>
